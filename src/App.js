@@ -11,20 +11,25 @@ import { collection, getDocs, onSnapshot, doc } from 'firebase/firestore';
 import { db } from './firebase/firebaseConfig';
 
 function App() {
+  const lista = [
+    {
+      item: "tarea 1",
+      done: true,
+      id: 2132
+    },
+    {
+      item: "tarea 2",
+      done: false,
+      id: 2135
+    }
+  ]
   const todoLista = useSelector(selectTodoLista)
   const [user, setUser] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
     const obtenerDatos = async()=>{
-      const datos = await getDocs(collection(db,'post'),{
-        dispatch(saveTodo(datos.map(doc)=>{
-          id: doc.id,
-          item: doc.data().item,
-          done: doc.data().done
-        }))
-      })}
-      console.log(datos)
+      
     }
 
     obtenerDatos();
@@ -37,7 +42,7 @@ function App() {
           user ? <>
           <div className="lista">
             {
-              todoLista.map(item => (
+              lista.map(item => (
                 <ListaItem item={item.item} done={item.done} id={item.id} />
               ))
             } 
